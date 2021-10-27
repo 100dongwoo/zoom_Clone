@@ -1,6 +1,6 @@
 import express from "express"
 import http from "http"
-import WebSocket from "ws";
+import WebSocket, { WebSocketServer } from 'ws';
 const app = express()
 
 app.set('view engine', "pug")
@@ -17,5 +17,20 @@ const server = http.createServer(app)
 const wss = new WebSocket.Server({server})
 // 이렇게 하면 http 서버와 웹 소켓 서버를 두개 작동 가능
 // http 서버 위에 websocket 서버를 만듬
+
+
+// function handleConnection(socket){
+//     console.log(socket)
+// }
+wss.on("connection",(socket)=>{
+    // console.log(socket)
+    console.log("Connected to Browser")
+    socket.on("close",()=>{console.log("Disconnect from Browser")})
+    socket.send("hello!!!!!!!!!!")
+    socket.on("message", message => {
+        console.log(message.toString('utf8'));
+    });
+})
+
 
 server.listen(3000,handleListen)
