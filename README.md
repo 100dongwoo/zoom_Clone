@@ -19,8 +19,9 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 ![img_1.png](img_1.png)
 - WebSocket Messages (back-end)
 ![img_2.png](img_2.png)
-
-
+- 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)
+![img_3.png](img_3.png)
+  
 ### 라이브러리
 [ws:Node.js WebSocket](https://www.npmjs.com/package/ws) <br/>
 - server.js socket : 연결된 브라우저

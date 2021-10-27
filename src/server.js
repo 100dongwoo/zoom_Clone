@@ -22,15 +22,21 @@ const wss = new WebSocket.Server({server})
 // function handleConnection(socket){
 //     console.log(socket)
 // }
+
+const sockets=[]
+// fake database
+
 wss.on("connection",(socket)=>{
+    sockets.push(socket)
     // console.log(socket)
     console.log("Connected to Browser")
     socket.on("close",()=>{console.log("Disconnect from Browser")})
     socket.send("hello!!!!!!!!!!")
     socket.on("message", message => {
-        console.log(message.toString('utf8'));
+        sockets.forEach(aSocket=>aSocket.send(message.toString('utf8')))
+        // socket.send(message.toString('utf8'))
+        // console.log(message.toString('utf8'));
     });
 })
-
 
 server.listen(3000,handleListen)
