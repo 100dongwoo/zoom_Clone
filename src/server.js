@@ -1,6 +1,7 @@
 import express from "express"
 import http from "http"
-import WebSocket, { WebSocketServer } from 'ws';
+import WebSocket, {WebSocketServer} from 'ws';
+
 const app = express()
 
 app.set('view engine', "pug")
@@ -23,20 +24,30 @@ const wss = new WebSocket.Server({server})
 //     console.log(socket)
 // }
 
-const sockets=[]
+const sockets = []
 // fake database
 
-wss.on("connection",(socket)=>{
+wss.on("connection", (socket) => {
     sockets.push(socket)
     // console.log(socket)
+    socket["nickname"] = "Anon"
     console.log("Connected to Browser")
-    socket.on("close",()=>{console.log("Disconnect from Browser")})
-    socket.send("hello!!!!!!!!!!")
-    socket.on("message", message => {
-        sockets.forEach(aSocket=>aSocket.send(message.toString('utf8')))
+    socket.on("close", () => {
+        console.log("Disconnect from Browser")
+    })
+    // socket.send("hello!!!!!!!!!!")
+    socket.on("message", msg => {
+        const message = JSON.parse(msg);
+        switch (message.type) {
+            case "new_message":
+                sockets.forEach(aSocket => aSocket.send(`${socket.nickname}:${message.payload}`))
+            case "nickname":
+                socket["nickname"] = message.payload
+        }
+
         // socket.send(message.toString('utf8'))
         // console.log(message.toString('utf8'));
     });
 })
 
-server.listen(3000,handleListen)
+server.listen(3000, handleListen)
