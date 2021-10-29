@@ -20,7 +20,7 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ## WEBSOCKETS
 
-- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 )<br/>
+- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 )
   ![img_1.png](img_1.png) <br/><br/>
 - WebSocket Messages (back-end)
   ![img_2.png](img_2.png) <br/><br/>
