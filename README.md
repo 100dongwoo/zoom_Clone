@@ -38,13 +38,13 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 - Socket.io는 webSocket + 다른것도 사용
 - webSocket은 object 전송 x , string 변환시키고 string 전송
 - socket.io는 어떤 event도 전송가능 / object 전송가능 / 서버에서 호출하는 function이 들어갈수있음 (callback함수)
-- back-end에서 function을 호출 하지만 fuction은 front-end에서 실행됨
+- back-end에서 function을 호출 하지만 fuction은 front-end에서 실행됨 <br/>
   ![img_6.png](img_6.png) <br/><br/>
-- socket.IO는 room.id를 제공(join을 통한 room 접속가능 )
+- socket.IO는 room.id를 제공(join을 통한 room 접속가능 ) <br/>
   ![img_7.png](img_7.png) <br/><br/>
-- 서버와 프론트에서 주고 받는 방법
+- 서버와 프론트에서 주고 받는 방법 <br/>
   ![img_8.png](img_8.png) <br/><br/>
-- 소켓전체에 뿌려주기위한
+- 소켓전체에 뿌려주기위한 <br/>
   ![img_9.png](img_9.png) <br/><br/>
 - npm i @socket.io/admin-ui [admin-ui](https://admin.socket.io) <br/>
 
