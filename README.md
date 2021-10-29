@@ -14,7 +14,7 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ![img2.png](img3.png)
 
-####        
+####         
 
 ![img4.png](img2.png)
 
@@ -44,9 +44,9 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
   ![img_7.png](img_7.png) <br/><br/>
 - 서버와 프론트에서 주고 받는 방법
   ![img_8.png](img_8.png) <br/><br/>
-- 소켓전체에 뿌려주기위한 
-![img_9.png](img_9.png) <br/><br/>
--   
+- 소켓전체에 뿌려주기위한
+  ![img_9.png](img_9.png) <br/><br/>
+- npm i @socket.io/admin-ui [admin-ui](https://admin.socket.io) <br/>
 
 <br/><br/>
 

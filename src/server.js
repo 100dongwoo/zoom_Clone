@@ -1,8 +1,10 @@
 import express from "express"
 import http from "http"
-import SocketIO from "socket.io"
+// import SocketIO from "socket.io"
+const {Server} = require("socket.io");  //  Socket.IO Admin UI때문에 수정
 import WebSocket, {WebSocketServer} from 'ws';
 
+const {instrument} = require("@socket.io/admin-ui");
 const app = express()
 
 app.set('view engine', "pug")
@@ -14,9 +16,21 @@ app.get("/*", (req, res) => res.redirect("/"))
 // app.listen(3000,handleListen)
 
 const httpServer = http.createServer(app)
-const wsServer = SocketIO(httpServer)
+// const wsServer = SocketIO(httpServer)
 
 
+//////////////////////
+const wsServer = new Server(httpServer, {
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true
+    }
+})    //  Socket.IO Admin UI때문에 수정
+
+instrument(wsServer, {
+    auth: false
+});
+////////////////////// Socket.IO Admin UI
 // function handleConnection(socket){
 //     console.log(socket)
 // }
