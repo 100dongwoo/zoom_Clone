@@ -14,7 +14,7 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ![img2.png](img3.png)
 
-####       
+####        
 
 ![img4.png](img2.png)
 
@@ -33,6 +33,7 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ## Socket.IO
 
+- socket.on 받는거 / socket.emit 보내는느낌
 - Socket.io는 webSocket 의부가기능이 아니며, socketIo는 가끔 webSocket 사용하는 FrameWork
 - Socket.io는 webSocket + 다른것도 사용
 - webSocket은 object 전송 x , string 변환시키고 string 전송
