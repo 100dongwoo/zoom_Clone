@@ -20,15 +20,15 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ## WEBSOCKETS
 
-- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 )
+- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 ) <br/> 
   ![img_1.png](img_1.png) <br/><br/>
-- WebSocket Messages (back-end)
+- WebSocket Messages (back-end) <br/> 
   ![img_2.png](img_2.png) <br/><br/>
-- 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)
+- 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)<br/>
   ![img_3.png](img_3.png) <br/><br/>
-- 백엔드에서는 다양한 프로그래밍언어 사용 자바스크립트 object 보내면 안됨 (문자열로 변경)  
+- 백엔드에서는 다양한 프로그래밍언어 사용 자바스크립트 object 보내면 안됨 (문자열로 변경)   <br/>
   ![img_4.png](img_4.png) <br/><br/>
-- socket안에 정보를 저장 할 수있다 object이기 때문
+- socket안에 정보를 저장 할 수있다 object이기 때문 <br/>
   ![img_5.png](img_5.png)
 
 ## Socket.IO
