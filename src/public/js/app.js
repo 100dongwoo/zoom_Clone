@@ -67,12 +67,34 @@ const socket = io()
 // io 함수가 자동으로 socket.io 실행하는 서버를 찾음
 const welcom = document.getElementById("welcome")
 const form = welcom.querySelector("form")
+const room = document.getElementById("room")
+room.hidden = true
+
+let roomName;
+
+function addMessage(message) {
+    const ul = room.querySelector("ul")
+    const li = document.createElement("li")
+    li.innerText = message;
+    ul.appendChild(li)
+}
+
+function showRoom() {
+    welcom.hidden = true;
+    room.hidden = false;
+    const h3 = room.querySelector("h3");
+    h3.innerText = `Room ${roomName}`;
+}
 
 function handleRoomSubmit(event) {
     event.preventDefault()
     const input = form.querySelector("input")
-    socket.emit("enter_room", {payload: input.value})
+    socket.emit("enter_room", input.value, showRoom)
+    roomName = input.value
     input.value = ""
 }
 
+socket.on("welcome", () => {
+    addMessage("someone Joined")
+})
 form.addEventListener("submit", handleRoomSubmit)
