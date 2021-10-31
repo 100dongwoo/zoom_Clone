@@ -14,15 +14,15 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ![img2.png](img3.png)
 
-####         
+####          
 
 ![img4.png](img2.png)
 
 ## WEBSOCKETS
 
-- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 ) <br/> 
+- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 ) <br/>
   ![img_1.png](img_1.png) <br/><br/>
-- WebSocket Messages (back-end) <br/> 
+- WebSocket Messages (back-end) <br/>
   ![img_2.png](img_2.png) <br/><br/>
 - 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)<br/>
   ![img_3.png](img_3.png) <br/><br/>
@@ -50,23 +50,12 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ## WebRTC
 
+- webRtc = p2p 방식 (서버 필요 없이 연결이 되있는 형식(직접연결))
 - javaScript 카메라 track 컨트롤
-![img_10.png](img_10.png) <br/><br/>
-- 카메라 옵션을 통한 정보 가져오기 
-![img_11.png](img_11.png)
--   
-
-
-
-
-
-
-
-
-
-
-
-
+  ![img_10.png](img_10.png) <br/><br/>
+- 카메라 옵션을 통한 정보 가져오기
+  ![img_11.png](img_11.png) <br/><br/>
+-
 
 <br/><br/>
 
