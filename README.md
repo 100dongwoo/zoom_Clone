@@ -20,15 +20,15 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 ## WEBSOCKETS
 
-- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 )
+- HTTP VS WebSocket ( 서버가 사용자 기억이 가능 ) <br/> 
   ![img_1.png](img_1.png) <br/><br/>
-- WebSocket Messages (back-end)
+- WebSocket Messages (back-end) <br/> 
   ![img_2.png](img_2.png) <br/><br/>
-- 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)
+- 다른 브라우저에서 (크롬, 엣지 등등) socket 전송위한 소스 (forEach)<br/>
   ![img_3.png](img_3.png) <br/><br/>
-- 백엔드에서는 다양한 프로그래밍언어 사용 자바스크립트 object 보내면 안됨 (문자열로 변경)  
+- 백엔드에서는 다양한 프로그래밍언어 사용 자바스크립트 object 보내면 안됨 (문자열로 변경)   <br/>
   ![img_4.png](img_4.png) <br/><br/>
-- socket안에 정보를 저장 할 수있다 object이기 때문
+- socket안에 정보를 저장 할 수있다 object이기 때문 <br/>
   ![img_5.png](img_5.png)
 
 ## Socket.IO
@@ -38,15 +38,35 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 - Socket.io는 webSocket + 다른것도 사용
 - webSocket은 object 전송 x , string 변환시키고 string 전송
 - socket.io는 어떤 event도 전송가능 / object 전송가능 / 서버에서 호출하는 function이 들어갈수있음 (callback함수)
-- back-end에서 function을 호출 하지만 fuction은 front-end에서 실행됨
+- back-end에서 function을 호출 하지만 fuction은 front-end에서 실행됨 <br/>
   ![img_6.png](img_6.png) <br/><br/>
-- socket.IO는 room.id를 제공(join을 통한 room 접속가능 )
+- socket.IO는 room.id를 제공(join을 통한 room 접속가능 ) <br/>
   ![img_7.png](img_7.png) <br/><br/>
-- 서버와 프론트에서 주고 받는 방법
+- 서버와 프론트에서 주고 받는 방법 <br/>
   ![img_8.png](img_8.png) <br/><br/>
-- 소켓전체에 뿌려주기위한
+- 소켓전체에 뿌려주기위한 <br/>
   ![img_9.png](img_9.png) <br/><br/>
 - npm i @socket.io/admin-ui [admin-ui](https://admin.socket.io) <br/>
+
+## WebRTC
+
+- javaScript 카메라 track 컨트롤
+![img_10.png](img_10.png) <br/><br/>
+- 카메라 옵션을 통한 정보 가져오기 
+![img_11.png](img_11.png)
+-   
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br/><br/>
 
@@ -57,5 +77,5 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 - server.js socket : 연결된 브라우저
 - front(app).js socket:  서버로의 연결
 
-[comment]: <> (https://nomadcoders.co/noom/lectures/3103)
+[comment]: <> (https://nomadcoders.co/noom/lectures/3077)
 

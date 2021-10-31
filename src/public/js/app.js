@@ -62,81 +62,168 @@
 ////////////////---------------------------------------------------------------------
 
 
-//----------------- socket.io
+// //----------------- socket.io
+// const socket = io()
+// // io 함수가 자동으로 socket.io 실행하는 서버를 찾음
+// const welcom = document.getElementById("welcome")
+// const form = welcom.querySelector("form")
+// const room = document.getElementById("room")
+// room.hidden = true
+//
+// let roomName;
+//
+// function addMessage(message) {
+//     const ul = room.querySelector("ul")
+//     const li = document.createElement("li")
+//     li.innerText = message;
+//     ul.appendChild(li)
+// }
+//
+// function handleMessageSubmit(event) {
+//     event.preventDefault()
+//     const input = room.querySelector("#msg input")
+//     const value = input.value
+//     socket.emit("new_message", input.value, roomName, () => {
+//         addMessage(`You : ${value}`)
+//     })
+//     input.value = ""
+// }
+//
+// function handleNicknameSubmit(event) {
+//     event.preventDefault()
+//     const input = room.querySelector("#name input")
+//     const value = input.value
+//     socket.emit("nickname", input.value)
+// }
+//
+// function showRoom() {
+//     welcom.hidden = true;
+//     room.hidden = false;
+//     const h3 = room.querySelector("h3");
+//     h3.innerText = `Room ${roomName}`;
+//     const msgForm = room.querySelector("#msg")
+//     const nameForm = room.querySelector("#name")
+//     nameForm.addEventListener("submit", handleNicknameSubmit)
+//     msgForm.addEventListener("submit", handleMessageSubmit)
+// }
+//
+// function handleRoomSubmit(event) {
+//     event.preventDefault()
+//     const input = form.querySelector("input")
+//     socket.emit("enter_room", input.value, showRoom)
+//     roomName = input.value
+//     input.value = ""
+// }
+//
+// socket.on("welcome", (user, newCount) => {
+//     const h3 = room.querySelector("h3");
+//     h3.innerText = `Room ${roomName}(${newCount})`;
+//     addMessage(`${user} arrived`)
+// })
+//
+// socket.on("bye", (left, newCount) => {
+//     addMessage(`${left} left OMG`)
+//     const h3 = room.querySelector("h3");
+//     h3.innerText = `Room ${roomName}(${newCount})`;
+// })
+// socket.on("room_change", (rooms) => {
+//     const roomList = welcom.querySelector("ul")
+//     roomList.innerHTML = ""
+//     if (rooms.length === 0) {
+//         return
+//     }
+//     rooms.forEach(room => {
+//         const li = document.createElement("li")
+//         li.innerText = room
+//         roomList.appendChild(li)
+//     })
+// })
+// socket.on("new_message", addMessage)
+// form.addEventListener("submit", handleRoomSubmit)
+
+//------------------------------------------Web-RTC
 const socket = io()
-// io 함수가 자동으로 socket.io 실행하는 서버를 찾음
-const welcom = document.getElementById("welcome")
-const form = welcom.querySelector("form")
-const room = document.getElementById("room")
-room.hidden = true
+const myFace = document.getElementById("myFace")
+const muteBtn = document.getElementById("mute")
+const cameraBtn = document.getElementById("camera")
+const camerasSelect = document.getElementById("cameras")
 
-let roomName;
+let myStream;
+let muted = false
+let cameraOff = false
 
-function addMessage(message) {
-    const ul = room.querySelector("ul")
-    const li = document.createElement("li")
-    li.innerText = message;
-    ul.appendChild(li)
-}
-
-function handleMessageSubmit(event) {
-    event.preventDefault()
-    const input = room.querySelector("#msg input")
-    const value = input.value
-    socket.emit("new_message", input.value, roomName, () => {
-        addMessage(`You : ${value}`)
-    })
-    input.value = ""
-}
-
-function handleNicknameSubmit(event) {
-    event.preventDefault()
-    const input = room.querySelector("#name input")
-    const value = input.value
-    socket.emit("nickname", input.value)
-}
-
-function showRoom() {
-    welcom.hidden = true;
-    room.hidden = false;
-    const h3 = room.querySelector("h3");
-    h3.innerText = `Room ${roomName}`;
-    const msgForm = room.querySelector("#msg")
-    const nameForm = room.querySelector("#name")
-    nameForm.addEventListener("submit", handleNicknameSubmit)
-    msgForm.addEventListener("submit", handleMessageSubmit)
-}
-
-function handleRoomSubmit(event) {
-    event.preventDefault()
-    const input = form.querySelector("input")
-    socket.emit("enter_room", input.value, showRoom)
-    roomName = input.value
-    input.value = ""
-}
-
-socket.on("welcome", (user, newCount) => {
-    const h3 = room.querySelector("h3");
-    h3.innerText = `Room ${roomName}(${newCount})`;
-    addMessage(`${user} arrived`)
-})
-
-socket.on("bye", (left, newCount) => {
-    addMessage(`${left} left OMG`)
-    const h3 = room.querySelector("h3");
-    h3.innerText = `Room ${roomName}(${newCount})`;
-})
-socket.on("room_change", (rooms) => {
-    const roomList = welcom.querySelector("ul")
-    roomList.innerHTML = ""
-    if (rooms.length === 0) {
-        return
+async function getCameras() {
+    try {
+        const devices = await navigator.mediaDevices.enumerateDevices()
+        const cameras = devices.filter(device => device.kind === "videoinput");
+        const currentCamera = myStream.getVideoTracks()[0]
+        cameras.forEach(cameras => {
+            const option = document.createElement("option")
+            option.value = cameras.deviceId
+            option.innerText = cameras.label
+            if (currentCamera.label === cameras.label) {
+                option.selected = true
+            }
+            camerasSelect.appendChild(option)
+        })
+    } catch (e) {
+        console.log(e)
     }
-    rooms.forEach(room => {
-        const li = document.createElement("li")
-        li.innerText = room
-        roomList.appendChild(li)
-    })
-})
-socket.on("new_message", addMessage)
-form.addEventListener("submit", handleRoomSubmit)
+}
+
+async function getMedia(deviceId) {
+    const initialConstrains = {
+        audio: false, video: {facingMode: "user"}
+    }
+    const cameraConstraints = {
+        audio: false,
+        video: {deviceId: {exact: deviceId}}
+    }
+    try {
+        myStream = await navigator.mediaDevices.getUserMedia(deviceId ? cameraConstraints : initialConstrains)
+        myFace.srcObject = myStream
+
+        if (!deviceId) { //딱한번만 실행하기 위해
+            await getCameras()
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+getMedia()
+
+function handleMuteClick() {
+    myStream
+        .getAudioTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+    if (!muted) {
+        muteBtn.innerText = "Unmute"
+        muted = true
+    } else {
+        muteBtn.innerText = "Mute"
+        muted = false
+    }
+}
+
+function handleCameraClick() {
+    myStream
+        .getVideoTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+    if (cameraOff) {
+        cameraBtn.innerText = "Turn Camera Off"
+        cameraOff = false
+    } else {
+        cameraBtn.innerText = "Turn Camera On"
+        cameraOff = true
+    }
+}
+
+async function handleCameraChange() {
+
+    getMedia(camerasSelect.value)
+}
+
+muteBtn.addEventListener("click", handleMuteClick)
+cameraBtn.addEventListener("click", handleCameraClick)
+camerasSelect.addEventListener("input", handleCameraChange)
