@@ -65,6 +65,12 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 
 - server.js socket : 연결된 브라우저
 - front(app).js socket:  서버로의 연결
+- webRtc logic 
+![img_12.png](img_12.png) <br/><br/>
+- 아래 두 소스의 실행되는 브라우저가 다르다. (offer 주고 받는 차이 )
+![img_13.png](img_13.png) <br/><br/>
+- Ice Candidate : 브라우저가 서로 소통할 수 있게 해주는 방법
+- 
 
 [comment]: <> (https://nomadcoders.co/noom/lectures/3077)
 
