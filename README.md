@@ -72,7 +72,9 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 - Ice Candidate : 브라우저가 서로 소통할 수 있게 해주는 방법
 - npm install localtunnel (url 일시적으로준다) lt --port 3000
 - STUN server : 장치에 공용주소를 알려주는 서버
-- 
+- DataChannel 통한 peer to peer 교환(각각 DataChannel 생성해줘야한다= 변수 정의하는 곳이 다름)
+- 이 변수를 양쪽 브라우저에 모두 정의 해야함  (myDataChannel.send("")= 테스트방법)
+![img_14.png](img_14.png)
 
 [comment]: <> (https://nomadcoders.co/noom/lectures/3077)
 

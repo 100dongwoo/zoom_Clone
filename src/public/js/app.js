@@ -157,6 +157,7 @@ let muted = false
 let cameraOff = false
 let roomName;
 let myPeerConnection
+let myDataChannel;
 
 async function getCameras() {
     try {
@@ -262,6 +263,12 @@ welcomeForm.addEventListener("submit", handleWelcomeSubmit)
 
 // socket Code
 socket.on("welcome", async () => {
+    myDataChannel = myPeerConnection.createDataChannel("chat")
+    myDataChannel.addEventListener("message", (event) => {
+        console.log(event.data)
+    })
+    console.log("made data channel")
+
     const offer
         = await myPeerConnection.createOffer()
     myPeerConnection.setLocalDescription(offer)
@@ -270,6 +277,12 @@ socket.on("welcome", async () => {
 })
 ///////////위 아래 소스가 다른 브라우저에서 실행되는것~~~~~
 socket.on("offer", async (offer) => {
+    myPeerConnection.addEventListener("datachannel", (event) => {
+        myDataChannel = event.channel
+        myDataChannel.addEventListener("message", (event) => {
+            console.log(event.data)
+        })
+    })
     console.log("received the offer")
     myPeerConnection.setRemoteDescription(offer)
     const answer = await myPeerConnection.createAnswer()
@@ -294,7 +307,7 @@ socket.on("ice", (ice) => {
 function makeConnection() {
 
     myPeerConnection = new RTCPeerConnection({
-        iceServers:[{ //구글이 지원해주는 무료 STUN 서버
+        iceServers: [{ //구글이 지원해주는 무료 STUN 서버
             urls: [
                 "stun:stun.l.google.com:19302",
                 "stun:stun1.l.google.com:19302",
