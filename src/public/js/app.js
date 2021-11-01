@@ -226,8 +226,13 @@ function handleCameraClick() {
 }
 
 async function handleCameraChange() {
-
-    getMedia(camerasSelect.value)
+    await getMedia(camerasSelect.value)
+    if (myPeerConnection) {
+        const videoTrack = myStream.getVideoTracks()[0]
+        const videoSender = myPeerConnection.getSenders().find(sender => sender.track.kind === "video")
+        videoSender.replaceTrack(videoTrack)
+        //     sender 부분을 통한 카메라 변경 시 다른 브라우저에서 작동
+    }
 }
 
 muteBtn.addEventListener("click", handleMuteClick)
@@ -287,7 +292,18 @@ socket.on("ice", (ice) => {
 
 //  RTC Code
 function makeConnection() {
-    myPeerConnection = new RTCPeerConnection()
+
+    myPeerConnection = new RTCPeerConnection({
+        iceServers:[{ //구글이 지원해주는 무료 STUN 서버
+            urls: [
+                "stun:stun.l.google.com:19302",
+                "stun:stun1.l.google.com:19302",
+                "stun:stun2.l.google.com:19302",
+                "stun:stun3.l.google.com:19302",
+                "stun:stun4.l.google.com:19302",
+            ],
+        }]
+    })
     myPeerConnection.addEventListener("icecandidate", handleIce)
     myPeerConnection.addEventListener("addstream", handleAddStream)
     myStream.getTracks().forEach(track => myPeerConnection.addTrack(track, myStream))

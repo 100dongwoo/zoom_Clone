@@ -70,6 +70,8 @@ Zoom Clone using NodeJs,WebRTC AND Websockets (javaScript)
 - 아래 두 소스의 실행되는 브라우저가 다르다. (offer 주고 받는 차이 )
 ![img_13.png](img_13.png) <br/><br/>
 - Ice Candidate : 브라우저가 서로 소통할 수 있게 해주는 방법
+- npm install localtunnel (url 일시적으로준다) lt --port 3000
+- STUN server : 장치에 공용주소를 알려주는 서버
 - 
 
 [comment]: <> (https://nomadcoders.co/noom/lectures/3077)
